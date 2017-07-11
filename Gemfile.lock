@@ -1,0 +1,22 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    hobby (0.0.11)
+      rack
+    hobby-json (0.0.4)
+      rack
+    mysql2 (0.4.8)
+    puma (3.9.1)
+    rack (2.0.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  hobby
+  hobby-json
+  mysql2
+  puma
+
+BUNDLED WITH
+   1.15.1
