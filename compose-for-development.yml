@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  db:
+    image: mariadb
+    ports:
+      - 127.0.0.1:3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: dev
+      MYSQL_PASSWORD: devpass
+      MYSQL_DATABASE: devdb
