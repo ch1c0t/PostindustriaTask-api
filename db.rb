@@ -20,3 +20,6 @@ DB = Timeout.timeout 20 do
     retry
   end
 end
+
+Sequel.extension :migration
+Sequel::Migrator.run DB, 'migrations'
