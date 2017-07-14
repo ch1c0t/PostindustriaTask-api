@@ -1,0 +1,5 @@
+Apply all migrations:
+  bundle exec sequel -E -m migrations mysql2://dev:devpass@127.0.0.1/devdb
+
+Rollback all migrations:
+  bundle exec sequel -E -m migrations -M 0 mysql2://dev:devpass@127.0.0.1/devdb
