@@ -18,3 +18,9 @@ In the cases when used to describe data storage bits/bytes are calculated as fol
                           In data communications, a kilobit is a thousand bits, or 1,000 (103) bits. It's commonly used for measuring the amount of data that is transferred in a second between two telecommunication points. Kilobits per second is usually shortened to Kbps.
 
                           Some sources define a kilobit to mean 1,024 (that is, 210) bits. Although the bit is a unit of the binary number system, bits in data communications are discrete signal pulses and have historically been counted using the decimal number system. For example, 28.8 kilobits per second (Kbps) is 28,800 bits per second. Because of computer architecture and memory address boundaries, bytes are always some multiple or exponent of two.
+
+
+From https://en.wikipedia.org/wiki/Terabyte:
+The prefix tera represents the fourth power of 1000, and means 1012 in the International System of Units (SI), and therefore one terabyte is one trillion (short scale) bytes. The unit symbol for the terabyte is TB.
+
+1 TB = 1000000000000 bytes = 1000 gigabytes.
