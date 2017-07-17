@@ -3,7 +3,7 @@ ENV['DB_PASS'] = 'devpass'
 ENV['DB_NAME'] = 'devdb'
 ENV['DB_HOST'] = '127.0.0.1'
 
-require_relative '../api'
+require_relative '../lib/api'
 require 'hobby/devtools/rspec_helper'
 
 def clear_db

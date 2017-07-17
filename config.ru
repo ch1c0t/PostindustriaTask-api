@@ -1,5 +1,5 @@
 #\ -p 8080 -o 0.0.0.0
-require_relative 'api'
+require_relative 'lib/api'
 
 class Root 
   include Hobby
