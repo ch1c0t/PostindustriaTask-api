@@ -7,6 +7,10 @@ class Companies
   include Hobby
   include JSON
 
+  get do
+    DB[:companies].all
+  end
+
   post do
     errors = validate json
 
@@ -21,10 +25,6 @@ class Companies
       response.status = 422
       { 'errors' => errors }
     end
-  end
-
-  get do
-    DB[:companies].all
   end
 
   def validate json
