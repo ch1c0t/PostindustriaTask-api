@@ -1,0 +1,12 @@
+- post:
+    path: /companies
+    body:
+      name: ('A'*256)
+      quota: 1
+
+  response:
+    status: 422
+    body:
+      errors:
+        name:
+          - cannot exceed 255 characters
