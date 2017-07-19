@@ -31,15 +31,28 @@ class Companies
     errors = Hash.new { |h,k| h[k] = [] }
 
     quota = json['quota']
-    unless quota.is_a?(Float) || quota.is_a?(Integer)
-      errors['quota'] << "expected Float or Integer, got #{quota.class}"
+    unless quota
+      errors['quota'] << 'is missing'
     end
 
-    unless json['name'].is_a? String
-      errors['name'] << "expected String, got #{json['name'].class}"
+    unless quota&.is_a?(Float) || quota&.is_a?(Integer)
+      if quota
+        errors['quota'] << "expected Float or Integer, got #{quota.class}"
+      end
     end
 
-    if json['name'].size > 255
+    name = json['name']
+    unless name
+      errors['name'] << 'is missing'
+    end
+
+    unless name&.is_a? String
+      if name
+        errors['name'] << "expected String, got #{json['name'].class}"
+      end
+    end
+
+    if name && name.size > 255
       errors['name'] << "cannot exceed 255 characters"
     end
 

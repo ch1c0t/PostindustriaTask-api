@@ -1,0 +1,23 @@
+- post:
+    path: /companies
+    body:
+      name: A
+
+  response:
+    status: 422
+    body:
+      errors:
+        quota:
+          - is missing
+
+- post:
+    path: /companies
+    body:
+      quota: 1
+
+  response:
+    status: 422
+    body:
+      errors:
+        name:
+          - is missing
