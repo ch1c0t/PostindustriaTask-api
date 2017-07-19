@@ -28,10 +28,14 @@ class Companies
   end
 
   def validate json
-    errors = {}
+    errors = Hash.new { |h,k| h[k] = [] }
+
+    unless json['name'].is_a? String
+      errors['name'] << "expected String, got #{json['name'].class}"
+    end
 
     if json['name'].size > 255
-      errors['name'] = [ "cannot exceed 255 characters" ]
+      errors['name'] << "cannot exceed 255 characters"
     end
 
     errors

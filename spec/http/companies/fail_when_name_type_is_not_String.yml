@@ -1,0 +1,12 @@
+- post:
+    path: /companies
+    body:
+      name: 1
+      quota: 1
+
+  response:
+    status: 422
+    body:
+      errors:
+        name:
+          - expected String, got Integer
