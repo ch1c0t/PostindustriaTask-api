@@ -30,6 +30,11 @@ class Companies
   def validate json
     errors = Hash.new { |h,k| h[k] = [] }
 
+    quota = json['quota']
+    unless quota.is_a?(Float) || quota.is_a?(Integer)
+      errors['quota'] << "expected Float or Integer, got #{quota.class}"
+    end
+
     unless json['name'].is_a? String
       errors['name'] << "expected String, got #{json['name'].class}"
     end

@@ -1,0 +1,12 @@
+- post:
+    path: /companies
+    body:
+      name: A
+      quota: A
+
+  response:
+    status: 422
+    body:
+      errors:
+        quota:
+          - expected Float or Integer, got String
