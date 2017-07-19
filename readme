@@ -8,7 +8,7 @@ Rollback all migrations:
   bundle exec sequel -E -m migrations -M 0 mysql2://dev:devpass@127.0.0.1/devdb
 
 For development and testing:
-  docker-compose -f compose-for-development up
+  docker-compose -f compose-for-development.yml up
 
 To run the specs:
   bundle exec rspec
