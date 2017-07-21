@@ -12,51 +12,60 @@ class Companies
   end
 
   post do
-    errors = validate json
+    key :name, String, size: [:<=, 255]
+    key :quota, [Float, Integer]
 
     if errors.empty?
-      name, quota = json.values_at 'name', 'quota'
-      hash = { name: name, quota: quota }
-      DB[:companies].insert hash
+      DB[:companies].insert keys
 
       response.status = 201
-      DB[:companies].where(name: name).first
+      DB[:companies].where(name: keys[:name]).first
     else
       response.status = 422
       { 'errors' => errors }
     end
   end
+  
+  def keys
+    @keys ||= {}
+  end
 
-  def validate json
-    errors = Hash.new { |h,k| h[k] = [] }
+  def errors
+    @errors ||= Hash.new { |h,k| h[k] = [] }
+  end
 
-    quota = json['quota']
-    unless quota
-      errors['quota'] << 'is missing'
-    end
-
-    unless quota&.is_a?(Float) || quota&.is_a?(Integer)
-      if quota
-        errors['quota'] << "expected Float or Integer, got #{quota.class}"
+  def check_that_type_of value, with:, is:
+    name, type = with, is
+    case type
+    when Module
+      unless value.is_a? type
+        errors[name] << "expected #{type}, got #{value.class}"
+      end
+    when Array
+      types = type
+      unless types.any? { |type| value.is_a? type }
+        errors[name] << "expected #{types.join ' or '}, got #{value.class}"
       end
     end
+  end
 
-    name = json['name']
-    unless name
-      errors['name'] << 'is missing'
-    end
+  def key name, type, **constraints
+    if value = json[name.to_s]
+      check_that_type_of value, with: name, is: type
 
-    unless name&.is_a? String
-      if name
-        errors['name'] << "expected String, got #{json['name'].class}"
+      if constraint = constraints[:size]
+        comparator, number = constraint
+        unless value.size.send(comparator, number)
+          errors[name] << "cannot exceed 255 characters"
+        end
       end
+    else
+      errors[name] << 'is missing'
     end
 
-    if name && name.size > 255
-      errors['name'] << "cannot exceed 255 characters"
+    if errors.empty?
+      keys[name] = value
     end
-
-    errors
   end
 end
 
