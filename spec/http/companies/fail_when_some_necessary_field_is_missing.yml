@@ -8,7 +8,7 @@
     body:
       errors:
         quota:
-          - is missing
+          - is not present
 
 - post:
     path: /companies
@@ -20,4 +20,4 @@
     body:
       errors:
         name:
-          - is missing
+          - is not present

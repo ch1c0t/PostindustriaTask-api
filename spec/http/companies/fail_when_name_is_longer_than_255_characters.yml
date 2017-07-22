@@ -9,4 +9,4 @@
     body:
       errors:
         name:
-          - cannot exceed 255 characters
+          - is longer than 255 characters

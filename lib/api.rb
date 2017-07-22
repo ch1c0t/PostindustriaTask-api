@@ -3,6 +3,28 @@ require_relative 'db'
 require 'hobby'
 require 'hobby/json'
 
+class Company < Sequel::Model
+  plugin :validation_helpers
+
+  def validate
+    super
+    validates_presence [:name, :quota]
+
+    if errors.empty?
+      p name
+      validates_type String, :name # doesn't work as I expected
+      p name
+      p "name is #{name}"
+      unless name.is_a? String
+        errors.add :name, "expected String, got #{name.class}"
+      end
+
+      validates_type [Float, Integer], :quota
+      validates_max_length 255, :name
+    end
+  end
+end
+
 class Companies
   include Hobby
   include JSON
@@ -12,17 +34,16 @@ class Companies
   end
 
   post do
-    key :name, String, size: [:<=, 255]
-    key :quota, [Float, Integer]
+    company = Company.new json
 
-    if errors.empty?
-      DB[:companies].insert keys
-
+    if company.valid?
       response.status = 201
-      DB[:companies].where(name: keys[:name]).first
+      company.save
+      company.values
     else
       response.status = 422
-      { 'errors' => errors }
+      p company.errors
+      { 'errors' => company.errors }
     end
   end
   

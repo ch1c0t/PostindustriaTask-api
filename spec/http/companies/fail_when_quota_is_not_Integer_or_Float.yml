@@ -9,4 +9,4 @@
     body:
       errors:
         quota:
-          - expected Float or Integer, got String
+          - is not a valid float or integer
