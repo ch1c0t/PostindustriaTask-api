@@ -16,6 +16,10 @@ class Company < Sequel::Model
       validates_unique :name
     end
   end
+
+  def to_json
+    values.to_json
+  end
 end
 
 class Companies
@@ -32,7 +36,6 @@ class Companies
     if company.valid?
       status 201
       company.save
-      company.values
     else
       status 422
       { 'errors' => company.errors }
