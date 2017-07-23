@@ -21,7 +21,7 @@ GEM
     excon (0.57.1)
     hash-as-tree (0.0.5)
       to_proc (>= 0.0.7)
-    hobby (0.0.11)
+    hobby (0.0.12)
       rack
     hobby-devtools (0.0.12)
       awesome_print
@@ -136,4 +136,4 @@ DEPENDENCIES
   sequel
 
 BUNDLED WITH
-   1.15.1
+   1.15.3

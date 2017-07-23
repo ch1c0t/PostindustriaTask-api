@@ -30,11 +30,11 @@ class Companies
     company = Company.new json
 
     if company.valid?
-      response.status = 201
+      status 201
       company.save
       company.values
     else
-      response.status = 422
+      status 422
       { 'errors' => company.errors }
     end
   end
