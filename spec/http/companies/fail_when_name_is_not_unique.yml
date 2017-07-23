@@ -1,0 +1,25 @@
+- post:
+    path: /companies
+    body:
+      name: A
+      quota: 1
+
+  response:
+    status: 201
+    body:
+      id: 1
+      name: A
+      quota: 1.0
+
+- post:
+    path: /companies
+    body:
+      name: A
+      quota: 1.2
+
+  response:
+    status: 422
+    body:
+      errors:
+        name:
+          - is already taken

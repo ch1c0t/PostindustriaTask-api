@@ -13,6 +13,7 @@ class Company < Sequel::Model
     if errors.empty?
       validates_type [Float, Integer], :quota
       validates_max_length 255, :name
+      validates_unique :name
     end
   end
 end
