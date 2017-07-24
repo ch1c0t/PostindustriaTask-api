@@ -1,0 +1,35 @@
+- post:
+    path: /companies
+    body:
+      name: A
+      quota: 1
+
+  response:
+    status: 201
+    body:
+      id: 1
+      name: A
+      quota: 1.0
+
+- put:
+    path: /companies/1
+    body:
+      name: A2
+      quota: 1.2
+
+  response:
+    status: 200
+    body:
+      id: 1
+      name: A2
+      quota: 1.2
+
+- get:
+    path: /companies
+
+  response:
+    status: 200
+    body:
+      - id: 1
+        name: A2
+        quota: 1.2
