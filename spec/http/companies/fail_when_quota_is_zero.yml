@@ -1,0 +1,12 @@
+- post:
+    path: /companies
+    body:
+      name: A
+      quota: 0
+
+  response:
+    status: 422
+    body:
+      errors:
+        quota:
+          - cannot be 0

@@ -14,6 +14,7 @@ class Company < Sequel::Model
       validates_type [Float, Integer], :quota
       validates_max_length 255, :name
       validates_unique :name
+      errors.add :quota, 'cannot be 0' if quota == 0
     end
   end
 
