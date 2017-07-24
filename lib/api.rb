@@ -62,6 +62,12 @@ class Companies
       }
     end
   end
+
+  delete '/:id' do
+    company = Company[my[:id]]
+    company.delete
+    status 204
+  end
 end
 
 class API
