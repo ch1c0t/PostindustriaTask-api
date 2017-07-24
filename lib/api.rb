@@ -64,9 +64,15 @@ class Companies
   end
 
   delete '/:id' do
-    company = Company[my[:id]]
-    company.delete
-    status 204
+    id = my[:id]
+
+    if company = Company[id]
+      company.delete
+      status 204
+    else
+      status 404
+      { 'errors' => "company with id #{id} was not found" }
+    end
   end
 end
 

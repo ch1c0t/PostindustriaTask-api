@@ -1,0 +1,30 @@
+- post:
+    path: /companies
+    body:
+      name: A
+      quota: 1
+
+  response:
+    status: 201
+    body:
+      id: 1
+      name: A
+      quota: 1.0
+
+- delete:
+    path: /companies/2
+
+  response:
+    status: 404
+    body:
+      errors: company with id 2 was not found
+
+- get:
+    path: /companies
+
+  response:
+    status: 200
+    body:
+      - id: 1
+        name: A
+        quota: 1.0
