@@ -43,14 +43,22 @@ class Companies
   end
 
   put '/:id' do
-    company = Company[my[:id]]
-    company.update json
+    if company = Company[my[:id]]
+      company.update json
 
-    if company.valid?
-      company.save
+      if company.valid?
+        company.save
+      else
+        status 422
+        { 'errors' => company.errors }
+      end
     else
-      status 422
-      { 'errors' => company.errors }
+      status 404
+      { 
+        'errors' => {
+          'id' => ['not found']
+        }
+      }
     end
   end
 end

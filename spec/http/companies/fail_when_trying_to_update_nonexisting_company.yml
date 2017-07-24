@@ -1,0 +1,25 @@
+- post:
+    path: /companies
+    body:
+      name: A
+      quota: 1
+
+  response:
+    status: 201
+    body:
+      id: 1
+      name: A
+      quota: 1.0
+
+- put:
+    path: /companies/2
+    body:
+      name: A2
+      quota: 1.2
+
+  response:
+    status: 404
+    body:
+      errors:
+        id:
+          - not found
