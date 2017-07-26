@@ -10,7 +10,7 @@ class Companies
   include JSON
 
   get do
-    DB[:companies].all
+    Company.all
   end
 
   post do

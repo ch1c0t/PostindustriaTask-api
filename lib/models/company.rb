@@ -13,7 +13,8 @@ class Company < Sequel::Model
     end
   end
 
-  def to_json
+  # _state -- an instance of JSON::Ext::Generator::State sometimes may be passed.
+  def to_json _state = nil
     values.to_json
   end
 end
