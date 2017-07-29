@@ -27,24 +27,28 @@ class Users
   end
 end
 
-class Companies
+class Resource
   include Hobby
   include JSON
 
+  def initialize model
+    @model = model
+  end
+
   get do
-    Company.all
+    @model.all
   end
 
   post do
     if invalid_fields.empty?
-      company = Company.new json
+      model = @model.new json
 
-      if company.valid?
+      if model.valid?
         status 201
-        company.save
+        model.save
       else
         status 422
-        { 'errors' => company.errors }
+        { 'errors' => model.errors }
       end
     else
       response_for_invalid_fields
@@ -53,14 +57,14 @@ class Companies
 
   put '/:id' do
     if invalid_fields.empty?
-      if company = Company[my[:id]]
-        company.update json
+      if model = @model[my[:id]]
+        model.update json
 
-        if company.valid?
-          company.save
+        if model.valid?
+          model.save
         else
           status 422
-          { 'errors' => company.errors }
+          { 'errors' => model.errors }
         end
       else
         status 404
@@ -78,8 +82,8 @@ class Companies
   delete '/:id' do
     id = my[:id]
 
-    if company = Company[id]
-      company.delete
+    if model = @model[id]
+      model.delete
       status 204
     else
       status 404
@@ -89,7 +93,7 @@ class Companies
 
   def invalid_fields
     @invalid_fields ||= begin
-                          valid_fields = Company.columns[1..-1].map(&:to_s)
+                          valid_fields = @model.columns[1..-1].map(&:to_s)
                           json.keys - valid_fields
                         end
   end
@@ -108,5 +112,5 @@ class API
   include Hobby
 
   map('/users') { run Users.new }
-  map('/companies') { run Companies.new }
+  map('/companies') { run Resource.new Company }
 end
