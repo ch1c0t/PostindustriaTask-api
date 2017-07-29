@@ -14,14 +14,23 @@ class Companies
   end
 
   post do
-    company = Company.new json
+    if invalid_fields.empty?
+      company = Company.new json
 
-    if company.valid?
-      status 201
-      company.save
+      if company.valid?
+        status 201
+        company.save
+      else
+        status 422
+        { 'errors' => company.errors }
+      end
     else
       status 422
-      { 'errors' => company.errors }
+      { 
+        'errors' => {
+          'invalid_fields' => invalid_fields
+        }
+      }
     end
   end
 
@@ -55,6 +64,13 @@ class Companies
       status 404
       { 'errors' => "company with id #{id} was not found" }
     end
+  end
+
+  def invalid_fields
+    @invalid_fields ||= begin
+                          valid_fields = Company.columns[1..-1].map(&:to_s)
+                          json.keys - valid_fields
+                        end
   end
 end
 

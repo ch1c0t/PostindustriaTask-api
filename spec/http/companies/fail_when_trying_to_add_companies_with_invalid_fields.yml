@@ -1,0 +1,15 @@
+- post:
+    path: /companies
+    body:
+      name: A
+      quota: 1
+      some1: some
+      some2: some
+
+  response:
+    status: 422
+    body:
+      errors:
+        invalid_fields:
+          - some1
+          - some2
