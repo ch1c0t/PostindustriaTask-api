@@ -9,6 +9,7 @@ require 'hobby/devtools/rspec_helper'
 def clear_db
   DB.run 'SET FOREIGN_KEY_CHECKS = 0'
   DB[:companies].truncate
+  DB[:users].truncate
   DB.run 'SET FOREIGN_KEY_CHECKS = 1'
 end
 

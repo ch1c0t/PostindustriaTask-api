@@ -3,7 +3,29 @@ require_relative 'db'
 require 'hobby'
 require 'hobby/json'
 
+require_relative 'models/user'
 require_relative 'models/company'
+
+class Users
+  include Hobby
+  include JSON
+
+  get do
+    User.all
+  end
+
+  post do
+    user = User.new json
+
+    if user.valid?
+      status 201
+      user.save
+    else
+      status 422
+      { 'errors' => user.errors }
+    end
+  end
+end
 
 class Companies
   include Hobby
@@ -85,5 +107,6 @@ end
 class API
   include Hobby
 
+  map('/users') { run Users.new }
   map('/companies') { run Companies.new }
 end

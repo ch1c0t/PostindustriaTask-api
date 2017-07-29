@@ -1,0 +1,70 @@
+- post:
+    path: /companies
+    body:
+      name: A
+      quota: 1
+
+  response:
+    status: 201
+    body:
+      id: 1
+      name: A
+      quota: 1.0
+
+- post:
+    path: /companies
+    body:
+      name: B
+      quota: 1.2
+
+  response:
+    status: 201
+    body:
+      id: 2
+      name: B
+      quota: 1.2
+
+- post:
+    path: /users
+    body:
+      name: John Doe
+      email: john.doe@a.com
+      company_id: 1
+
+  response:
+    status: 201
+    body:
+      id: 1
+      name: John Doe
+      email: john.doe@a.com
+      company_id: 1
+
+- post:
+    path: /users
+    body:
+      name: John Roe
+      email: john.roe@a.com
+      company_id: 1
+
+  response:
+    status: 201
+    body:
+      id: 2
+      name: John Roe
+      email: john.roe@a.com
+      company_id: 1
+
+- get:
+    path: /users
+
+  response:
+    status: 200
+    body:
+      - id: 1
+        name: John Doe
+        email: john.doe@a.com
+        company_id: 1
+      - id: 2
+        name: John Roe
+        email: john.roe@a.com
+        company_id: 1
