@@ -25,32 +25,31 @@ class Companies
         { 'errors' => company.errors }
       end
     else
-      status 422
-      { 
-        'errors' => {
-          'invalid_fields' => invalid_fields
-        }
-      }
+      response_for_invalid_fields
     end
   end
 
   put '/:id' do
-    if company = Company[my[:id]]
-      company.update json
+    if invalid_fields.empty?
+      if company = Company[my[:id]]
+        company.update json
 
-      if company.valid?
-        company.save
+        if company.valid?
+          company.save
+        else
+          status 422
+          { 'errors' => company.errors }
+        end
       else
-        status 422
-        { 'errors' => company.errors }
+        status 404
+        {
+          'errors' => {
+            'id' => ['not found']
+          }
+        }
       end
     else
-      status 404
-      { 
-        'errors' => {
-          'id' => ['not found']
-        }
-      }
+      response_for_invalid_fields
     end
   end
 
@@ -71,6 +70,15 @@ class Companies
                           valid_fields = Company.columns[1..-1].map(&:to_s)
                           json.keys - valid_fields
                         end
+  end
+
+  def response_for_invalid_fields
+    status 422
+    {
+      'errors' => {
+        'invalid_fields' => invalid_fields
+      }
+    }
   end
 end
 

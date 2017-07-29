@@ -1,0 +1,28 @@
+- post:
+    path: /companies
+    body:
+      name: A
+      quota: 1
+
+  response:
+    status: 201
+    body:
+      id: 1
+      name: A
+      quota: 1
+
+- put:
+    path: /companies/1
+    body:
+      name: AA
+      quota: 2
+      some1: some
+      some2: some
+
+  response:
+    status: 422
+    body:
+      errors:
+        invalid_fields:
+          - some1
+          - some2
