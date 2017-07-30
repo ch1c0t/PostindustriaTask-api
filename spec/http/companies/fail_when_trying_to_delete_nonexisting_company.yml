@@ -17,7 +17,7 @@
   response:
     status: 404
     body:
-      errors: company with id 2 was not found
+      errors: Company with id 2 was not found
 
 - get:
     path: /companies

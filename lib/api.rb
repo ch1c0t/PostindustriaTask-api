@@ -87,7 +87,7 @@ class Resource
       status 204
     else
       status 404
-      { 'errors' => "company with id #{id} was not found" }
+      { 'errors' => "#{@model.name} with id #{id} was not found" }
     end
   end
 
