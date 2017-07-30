@@ -2,10 +2,10 @@ To install the dependencies:
   bundle install
 
 Apply all migrations:
-  bundle exec sequel -E -m migrations mysql2://dev:devpass@127.0.0.1/devdb
+  rake 'db:migrate'
 
 Rollback all migrations:
-  bundle exec sequel -E -m migrations -M 0 mysql2://dev:devpass@127.0.0.1/devdb
+  rake 'db:migrate[0]'
 
 For development and testing:
   docker-compose -f compose-for-development.yml up
