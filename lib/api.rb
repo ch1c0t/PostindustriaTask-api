@@ -6,27 +6,6 @@ require 'hobby/json'
 require_relative 'models/user'
 require_relative 'models/company'
 
-class Users
-  include Hobby
-  include JSON
-
-  get do
-    User.all
-  end
-
-  post do
-    user = User.new json
-
-    if user.valid?
-      status 201
-      user.save
-    else
-      status 422
-      { 'errors' => user.errors }
-    end
-  end
-end
-
 class Resource
   include Hobby
   include JSON
@@ -111,6 +90,6 @@ end
 class API
   include Hobby
 
-  map('/users') { run Users.new }
+  map('/users') { run Resource.new User }
   map('/companies') { run Resource.new Company }
 end
