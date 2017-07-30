@@ -11,7 +11,7 @@ For development and testing:
   docker-compose -f compose-for-development.yml up
 
 To enter devconsole:
-  DB_USER=dev DB_PASS=devpass DB_NAME=devdb DB_HOST=127.0.0.1 bundle exec ruby devconsole.rb
+  rake console
 
 To run the specs:
   bundle exec rspec
