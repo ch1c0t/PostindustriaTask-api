@@ -1,0 +1,30 @@
+An API for https://github.com/ch1c0t/PostindustriaTask[PostindustriaTask]
+implemented with https://github.com/ch1c0t/hobby[Hobby].
+
+== Dependencies
+
+To install Ruby dependencies:
+[source,bash]
+----
+bundle install
+----
+
+During development and testing, `docker-compose` is required:
+[source,bash]
+----
+docker-compose -f compose-for-development.yml up
+----
+
+== Development
+
+To enter devconsole:
+[source, bash]
+----
+rake console
+----
+
+To run the specs:
+[source,bash]
+----
+bundle exec rspec
+----
